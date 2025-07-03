@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MauiCameraSettings.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             x:Class="MauiCameraSettings.Views.PhotoDetailPage"
+             x:Name="PhotoDetail"
+             Title="{Binding Title}"
+             BindingContext="{x:Reference PhotoDetail}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Back" Clicked="BackButton_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <controls:PinchTapPanContainer x:Name="PinchTapPanContainer">
+                <controls:PinchTapPanContainer.Content>
+                    <ffimageloading:CachedImage 
+                        x:Name="DetailImage"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundPlaceHolder}, Dark={StaticResource BackgroundPlaceHolderDark}}"
+                        DownsampleToViewSize="false"/>
+                </controls:PinchTapPanContainer.Content>
+            </controls:PinchTapPanContainer>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

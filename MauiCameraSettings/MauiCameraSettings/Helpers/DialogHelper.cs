@@ -26,7 +26,9 @@ public static class DialogHelper
         {
             msg = msg.Substring(0, Constants.MAX_ALERT_MSG_LENGTH);
         }
-        await Application.Current.MainPage.DisplayAlert(title, msg, "OK");
+
+        var page = GetCurrentPage();
+        await page.DisplayAlert(title, msg, "OK");
     }
 
     public static async Task DisplayException(string title, Exception e)

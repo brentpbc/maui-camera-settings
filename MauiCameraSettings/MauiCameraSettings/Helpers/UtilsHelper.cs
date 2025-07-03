@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace MauiCameraSettings.Helpers;
 
@@ -52,4 +53,24 @@ public class UtilsHelper
             return string.Empty;
         }
     }   
+    
+    public static string GetFullAppDataPath(string relativePath = "")
+    {
+        if (!string.IsNullOrEmpty(relativePath))
+        {
+            return Path.Combine(GetAppTempDataPath(),
+                relativePath);
+        }
+        else
+        {
+            return GetAppTempDataPath();
+        }
+    }
+
+    public static string GetAppTempDataPath()
+    {
+        return Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "temp");
+    }
 }

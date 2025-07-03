@@ -13,7 +13,8 @@
             HasShadow="False"
             HorizontalOptions="Center"                
             VerticalOptions="Center"
-            Visual="Default">
+            Visual="Default"
+            BorderColor="Transparent">
             <VerticalStackLayout Spacing="8">
                 <ActivityIndicator         
                     Visual="Default"

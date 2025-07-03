@@ -13,7 +13,7 @@
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid RowDefinitions="auto,*">
-            <Grid HeightRequest="{StaticResource PhotoRollHeightSmall}">
+            <Grid HeightRequest="{StaticResource PhotoRollHeightSmall}" Margin="{StaticResource PaddingStandard}">
                 <!-- Image Preview-->
                 <ffimageloading:CachedImage
                     x:Name="SiteImage"
@@ -94,7 +94,7 @@
                     <Switch IsToggled="{Binding SaveToDevice}" Toggled="SaveToDeviceSwitch_OnToggled" HorizontalOptions="Start"/>
             
                     <!-- Buttons -->
-                    <Button Text="Image Metadata" Command="{Binding ViewImageMetaDataCommand}"/>
+                    <Button Text="Image Metadata" Command="{Binding ViewImageMetaDataCommand}" Style="{StaticResource ButtonPrimaryStyle}"/>
                     <Button Text="Reset to default"
                             Command="{Binding ResetSettingsCommand}" 
                             Style="{StaticResource ButtonDangerOutlineStyle}"                    

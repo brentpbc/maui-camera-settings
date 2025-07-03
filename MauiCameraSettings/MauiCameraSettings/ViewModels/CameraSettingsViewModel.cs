@@ -80,7 +80,6 @@ public class CameraSettingsViewModel : BaseViewModel
     public Command GetPhotoCommand { get; set; }
     public Command ViewPhotoCommand { get; set; }
     public Command ResetSettingsCommand { get; set; }
-    public Command SaveSettingsCommand { get; set; }
     public Command CancelCommand { get; set; }
     public Command ViewImageMetaDataCommand { get; set; }
 
@@ -125,7 +124,6 @@ public class CameraSettingsViewModel : BaseViewModel
         GetPhotoCommand.ChangeCanExecute();
         ViewPhotoCommand.ChangeCanExecute();
         ResetSettingsCommand.ChangeCanExecute();
-        SaveSettingsCommand.ChangeCanExecute();
         CancelCommand.ChangeCanExecute();
         ViewImageMetaDataCommand.ChangeCanExecute();
     }
@@ -229,7 +227,13 @@ public class CameraSettingsViewModel : BaseViewModel
         var result = await СapturePhoto();
         if (!result.Success)
         {
-            await DialogHelper.DisplayErrorMessage("Error Capturing Photo", result.Message);
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                StatusText = string.Empty;
+                IsBusy = false;
+                await DialogHelper.DisplayErrorMessage("Error Capturing Photo", result.Message);
+            });
+            
             await LoggingHelper.CreateErrorLog(nameof(CameraSettingsPage), "Capture Photo", result.Message);
         }
     }
@@ -409,14 +413,13 @@ public class CameraSettingsViewModel : BaseViewModel
     async Task ViewPhoto()
     {
         if (IsBusy) return;
-
-        DialogHelper.DisplayErrorMessage("Not Implemented", "View Photo has not been implemented");
-        /*if (FinalFileBytes != null && FinalFileBytes.Length > 0)
+        
+        if (FinalFileBytes != null && FinalFileBytes.Length > 0)
         {
             await DialogHelper.NavigateToModalPage("Photo Upload Settings Photo Detail Page", 
                 new NavigationPage(
                     new PhotoDetailPage(FinalFileBytes)));
-        }*/
+        }
     }
 
     public async Task CheckSaveToDevicePermissions()

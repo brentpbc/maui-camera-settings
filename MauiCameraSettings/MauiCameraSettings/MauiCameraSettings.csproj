@@ -68,4 +68,17 @@
         <PackageReference Include="Xamarin.MediaGallery" Version="2.2.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <MauiXaml Update="Views\PhotoDetailPage.xaml">
+        <SubType>Designer</SubType>
+      </MauiXaml>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\PhotoDetailPage.xaml.cs">
+        <DependentUpon>PhotoDetailPage.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>

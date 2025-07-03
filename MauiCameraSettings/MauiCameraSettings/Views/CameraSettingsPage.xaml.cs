@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MauiCameraSettings.Helpers;
 using MauiCameraSettings.ViewModels;
 using Microsoft.Maui.Controls;
 
@@ -67,5 +68,11 @@ public partial class CameraSettingsPage : ContentPage
     void RestoreOrientationSwitch_OnToggled(object sender, ToggledEventArgs e)
     {
         UpdateImage();
+    }
+
+    async void ErrorDialogButton_OnClicked(object sender, EventArgs e)
+    {
+        //await DisplayAlert("Test", "Test clicked", "ok");
+        await DialogHelper.DisplayErrorMessage("Test", "Display error message clicked");
     }
 }

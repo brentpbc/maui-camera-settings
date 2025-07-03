@@ -7,7 +7,8 @@
              xmlns:selectors="clr-namespace:MauiCameraSettings.Selectors"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiCameraSettings.Views.BasicListModalPage"
-             x:DataType="viewmodel:BasicListViewModel">
+             x:DataType="viewmodel:BasicListViewModel"
+             Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Done" Clicked="DoneToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
