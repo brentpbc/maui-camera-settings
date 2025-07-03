@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:viewmodel="clr-namespace:MauiCameraSettings.Views"
+             xmlns:model="clr-namespace:MauiCameraSettings.Models"
+             xmlns:controls="clr-namespace:MauiCameraSettings.Controls"
+             xmlns:selectors="clr-namespace:MauiCameraSettings.Selectors"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiCameraSettings.Views.BasicListModalPage"
+             x:DataType="viewmodel:BasicListViewModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Clicked="DoneToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="DefaultTemplate"  x:DataType="model:CollectionItem">
+                <ViewCell>
+                    <Label Style="{StaticResource LabelMedium}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding Code}" />
+                                <Span Text=" - " />
+                                <Span Text="{Binding Description}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>                    
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="DescriptionOnlyTemplate"  x:DataType="model:CollectionItem">
+                <ViewCell>
+                    <Label Style="{StaticResource LabelMedium}" Text="{Binding Description}"/>                    
+                </ViewCell>
+            </DataTemplate>
+            <selectors:CollectionItemDataTemplateSelector x:Key="ItemTemplateSelector" DefaultTemplate="{StaticResource DefaultTemplate}" DescriptionOnlyTemplate="{StaticResource DescriptionOnlyTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Grid.RowDefinitions="*,auto" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="{StaticResource PaddingStandard}">
+            <ListView Grid.Row="0" SeparatorVisibility="None" SeparatorColor="Transparent" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ItemTemplateSelector}" HasUnevenRows="True" VerticalOptions="FillAndExpand"/>
+            <StackLayout Grid.Row="1" IsVisible="{Binding CanShareItems}" Padding="{StaticResource PaddingStandard}">
+                <!-- Share Button -->
+                <ImageButton Command="{Binding ShareCommand}"
+                             Style="{StaticResource ButtonIconStyle}"                                              
+                             VerticalOptions="Center"
+                             WidthRequest="{StaticResource IconSizeSmall}"
+                             HeightRequest="{StaticResource IconSizeSmall}" 
+                             Source="{StaticResource ButtonIconShareSmall}"
+                             Padding="0" Margin="0"/>
+            </StackLayout>
+            <!-- Busy Dialog -->
+            <controls:BusyDialog
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                StatusText="{Binding StatusText}"
+                IsVisible="{Binding IsBusy}">                
+            </controls:BusyDialog>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
