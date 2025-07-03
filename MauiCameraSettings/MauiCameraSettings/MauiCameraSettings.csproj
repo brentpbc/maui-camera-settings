@@ -60,11 +60,11 @@
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.81" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.81" />
         <PackageReference Include="ExifLibNet.Updated" Version="2.1.5" />
         <PackageReference Include="FFImageLoading.Maui" Version="1.2.5" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.71" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.71" />
         <PackageReference Include="Xamarin.MediaGallery" Version="2.2.1" />
     </ItemGroup>
 

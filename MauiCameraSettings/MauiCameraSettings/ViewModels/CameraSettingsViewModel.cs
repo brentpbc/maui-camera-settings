@@ -60,6 +60,15 @@ public class CameraSettingsViewModel : BaseViewModel
         get { return restoreOrientationExif; }
         set { SetProperty(ref restoreOrientationExif, value); }
     }
+    
+    bool forceMainThread = false;
+    public bool ForceMainThread
+    {
+        get { return forceMainThread; }
+        set { SetProperty(ref forceMainThread, value); }
+    }
+
+    public string Version { get; set; } = MauiVersion.VERSION;
 
     ImageSource photo = null;
     public ImageSource Photo
@@ -356,7 +365,7 @@ public class CameraSettingsViewModel : BaseViewModel
                 memoryStream = new MemoryStream(OriginalFileBytes); //Dont dispose or Image.FromSource wont load properly
                 memoryStream.Position = 0; //Initialise position to start of stream
                 var resizeResult = await ImageHelper.ResizeImageAsync(memoryStream, FileType, 
-                    Convert.ToInt32(PhotoSizeD),Convert.ToInt32(CompressionD), RestoreOrientationExif);
+                    Convert.ToInt32(PhotoSizeD),Convert.ToInt32(CompressionD), RestoreOrientationExif,ForceMainThread);
                 if (!resizeResult.Success)
                 {
                     await memoryStream.DisposeAsync();

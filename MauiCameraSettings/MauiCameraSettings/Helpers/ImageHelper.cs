@@ -3,6 +3,8 @@ using System.IO;
 using System.Threading.Tasks;
 using ExifLibrary;
 using MauiCameraSettings.Models.Results;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Graphics.Platform;
 using IImage = Microsoft.Maui.Graphics.IImage;
@@ -19,7 +21,7 @@ public class ImageHelper
     /// <param name="compression">Compression 0 - 100, 0=No Compression, 100=100% Compression</param>
     /// <param name="restoreExifOrientation">True = restore EXIF Orientation metadata</param>
     /// <returns>Return a new memory stream with Resized Image</returns>
-    public static async Task<TypedTaskResult<ResizeResult>> ResizeImageAsync(MemoryStream memStream, string imageType, int resizeValue, int compression, bool restoreExifOrientation)
+    public static async Task<TypedTaskResult<ResizeResult>> ResizeImageAsync(MemoryStream memStream, string imageType, int resizeValue, int compression, bool restoreExifOrientation, bool forceMainThread)
     {
         if (memStream == null)
         {
@@ -57,7 +59,20 @@ public class ImageHelper
             float resAmount =  resizeValue * .01f;
             float newWidth = image.Width * resAmount;
             float newHeight = image.Height * resAmount;
-            IImage newImage = image.Downsize(newWidth, newHeight, false);
+
+            IImage newImage = null;
+            if (forceMainThread)
+            {
+                //Only needed for Maui 9.0.81
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    newImage = image.Downsize(newWidth, newHeight, false);
+                });    
+            }
+            else
+            {
+                newImage = image.Downsize(newWidth, newHeight, false);
+            }
 
             var resizedImageStream = new MemoryStream();
             

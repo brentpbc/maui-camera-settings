@@ -12,8 +12,9 @@
              Title="Camera Settings"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid RowDefinitions="auto,*">
-            <Grid HeightRequest="{StaticResource PhotoRollHeightSmall}" Margin="{StaticResource PaddingStandard}">
+        <Grid RowDefinitions="auto,auto,*">
+            <Label Text="{Binding Version}"/>
+            <Grid Grid.Row="1" HeightRequest="{StaticResource PhotoRollHeightSmall}" Margin="{StaticResource PaddingStandard}">
                 <!-- Image Preview-->
                 <ffimageloading:CachedImage
                     x:Name="TheImage"
@@ -41,13 +42,15 @@
                         HorizontalOptions="Start"
                         IsVisible="{Binding ShowImageButton, Converter={StaticResource NotBool}}"/>
             </Grid>
-            <ScrollView Grid.Row="1">
+            <ScrollView Grid.Row="2">
                 <StackLayout Padding="{StaticResource PaddingStandard}">
                     
                     <Label Text="File Size:"  Style="{StaticResource LabelFieldNameStyle}" IsVisible="{Binding SizeHuman, Converter={StaticResource hasValue}}" MaxLines="1"/>
                     <Label Text="{Binding SizeHuman}"   IsVisible="{Binding SizeHuman, Converter={StaticResource hasValue}}" MaxLines="1"/>
+                    <Label Text="Force IImage.Downsize() on Main Thread:" Style="{StaticResource LabelFieldNameStyle}"/>
+                    <Switch IsToggled="{Binding ForceMainThread}" HorizontalOptions="Start"/>
                     
-                    <Label Text="Post Process Photo?:" Style="{StaticResource LabelFieldNameStyle}"/>
+                    <Label Text="Post Process Photo? (IImage.Downsize()):" Style="{StaticResource LabelFieldNameStyle}"/>
                     <Switch IsToggled="{Binding PostProcessImage}" Toggled="ProcessImage_OnToggled" HorizontalOptions="Start"/>
                     <Label Text="Photo Size:"  Style="{StaticResource LabelFieldNameStyle}"/>
                     <Label Text="{Binding PhotoSizeD, StringFormat='{0}%'}"  />
@@ -98,7 +101,7 @@
                     </Button>                
                 </StackLayout>
             </ScrollView>
-            <controls:BusyDialog Grid.Row="0" IsVisible="{Binding IsBusy}" StatusText="{Binding StatusText}"/>
+            <controls:BusyDialog Grid.Row="1" IsVisible="{Binding IsBusy}" StatusText="{Binding StatusText}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
