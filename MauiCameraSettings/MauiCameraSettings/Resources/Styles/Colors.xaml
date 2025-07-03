@@ -6,10 +6,10 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#512BD4</Color>
-    <Color x:Key="PrimaryDark">#ac99ea</Color>
+    <!-- <Color x:Key="Primary">#512BD4</Color>-->
+    <!-- <Color x:Key="PrimaryDark">#ac99ea</Color> -->
     <Color x:Key="PrimaryDarkText">#242424</Color>
-    <Color x:Key="Secondary">#DFD8F7</Color>
+    <!-- <Color x:Key="Secondary">#DFD8F7</Color> -->
     <Color x:Key="SecondaryDarkText">#9880e5</Color>
     <Color x:Key="Tertiary">#2B0B98</Color>
 
@@ -27,7 +27,130 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+    
+    <!-- 
+    General Naming Scheme 
+    {Item|{Area|Status}{SecondaryIdentifer}(level)(State)(Dark)
+    E.g.
+    BackgroundInfoSecondaryDark
+    
+    Notes
+    - If you update color names in here check they are not referenced in ConstantsCommon ColorKeys
+    - The Dark modifier on a colour means its meant to work in Dark Mode 
+    - For 8 Character Colors,First 2 chars are transparency e.g.50%=0x80hex=128/255=50%)  -->
+    
+    <!-- Theme -->
+    <Color x:Key="Primary">#1976d2</Color> <!-- Bootstrap Style Blue -->
+    <!-- <Color x:Key="Primary">#E90E65</Color>--> <!-- New BC Logo Pink -->
+    <Color x:Key="PrimaryDark">#004ba0</Color>
+    
+    <Color x:Key="PrimaryInfo">#63a4ff</Color>
+    <Color x:Key="PrimaryInfoDark">#3c567c</Color>
 
+    <Color x:Key="Secondary">#ced7db</Color>
+    <Color x:Key="SecondaryDark">#9da6a9</Color>
+    
+    <Color x:Key="SecondaryInfo">#8A2BE1</Color>
+    
+    <Color x:Key="SuccessLight">#5CAD60</Color>
+    <Color x:Key="SuccessDark">#43A047</Color>
+    <Color x:Key="DangerDark">#C62828</Color>
+    <Color x:Key="DangerLight">#D4444D</Color>
+    <Color x:Key="DangerBackground">#f9d1d5</Color>
+    <Color x:Key="WarningLight">#FBBE59</Color>
+    <Color x:Key="WarningDark">#FFB234</Color>
+    <Color x:Key="WarningBackground">#FFF1C7</Color>
+    <Color x:Key="ActionSecondary">#E1E2E1</Color>
+    <Color x:Key="ActionSecondaryDark">#57565D</Color>
+    <Color x:Key="ActionTertiary">#6C757D</Color>
+    <Color x:Key="ActionDisabled">#809da6a9</Color>
+    <Color x:Key="ActionDisabledDark">#585b60</Color>
+    
+    <!-- Background Colors -->
+    <Color x:Key="Background">#FFFFFF</Color>
+    <!-- https://dribbble.com/shots/15445409/attachments/7215622?mode=media -->
+    <!-- Shades from darkest: 1331216,18171C,24232A,3E3D44,57565D,717077 Complimentry Green:5CD677 -->
+    <Color x:Key="BackgroundDark">#131216</Color>
+    
+    <!-- Work around for ios Nav bar separator showing on theme change/when app is sent to background. Maui only shows Nav bar separator if bar barbackground color has full alpha  -->
+    <!-- See UpdateBarBackground https://github.com/dotnet/maui/blob/440fa7f6ff5602e9cbe23249df5d13c45fb261e1/src/Controls/src/Core/Compatibility/Handlers/NavigationPage/iOS/NavigationRenderer.cs#L677 -->
+    <Color x:Key="BackgroundWAlpha">#FEFFFFFF</Color>
+    <Color x:Key="BackgroundWAlphaDark">#FE131216</Color>
+    
+    <Color x:Key="BackgroundSecondary">#E1E2E1</Color>
+    <Color x:Key="BackgroundSecondaryDark">#3E3D44</Color>
+    
+    <Color x:Key="BackgroundTertiary">#AEAFAE</Color>
+    <Color x:Key="BackgroundTertiaryDark">#717077</Color>
+    
+    <Color x:Key="BackgroundInfo">#ebf1f9</Color>
+    <Color x:Key="BackgroundInfoDark">#4a5768</Color>
+    
+    <Color x:Key="BackgroundInfoAccent">#2C90F9</Color>
+    <Color x:Key="BackgroundInfoAccentDark">#B3DDFF</Color>
+    
+    <Color x:Key="BackgroundInfoSecondary">#E9E8FE</Color>
+    <Color x:Key="BackgroundInfoSecondaryDark">#504F65</Color>
+    
+    <Color x:Key="BackgroundPlaceHolder">#F1F3F4</Color>
+    <Color x:Key="BackgroundPlaceHolderDark">#57565D</Color>
+    
+    <Color x:Key="BackgroundLoading">#96000000</Color>
+    <Color x:Key="BackgroundLoadingDark">#DDFFFFFF</Color>
+    
+    <!-- Page Fader -->
+    <Color x:Key="PageFade">#AA000000</Color>
+            
+    <!-- Text Colors -->
+    <Color x:Key="Text">Black</Color>
+    <Color x:Key="TextDark">#F1F1F1</Color><!-- Also used for badges e.g. light text on dark background  -->
+    
+    <Color x:Key="TextSecondary">#96000000</Color>
+    <Color x:Key="TextSecondaryDark">#C8C8C8</Color>
+    
+    <Color x:Key="TextDisabled">#40000000</Color>
+    <Color x:Key="TextDisabledDark">#585b60</Color>
+                
+    <!-- Grays 
+    <Color x:Key="Gray100">#E1E1E1</Color>
+    <Color x:Key="Gray200">#C8C8C8</Color>
+    <Color x:Key="Gray300">#ACACAC</Color>
+    <Color x:Key="Gray400">#919191</Color>
+    <Color x:Key="Gray500">#6E6E6E</Color>
+    <Color x:Key="Gray600">#404040</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#141414</Color>-->
+    
+    <Color x:Key="CardBackground">White</Color>
+    <Color x:Key="CardBackgroundDark">#1C1C1E</Color>
+    
+    <Color x:Key="Separator">#96000000</Color>
+    <Color x:Key="SeparatorDark">#80FFFFFF</Color>
+    
+    <Color x:Key="SeparatorSecondary">#E1E2E1</Color>
+    <Color x:Key="SeparatorSecondaryDark">#3E3D44</Color>
+    
+    <!-- Progress Bars -->
+    <Color x:Key="ProgressBar">#5CAD60</Color>
+    <Color x:Key="ProgressBarBackground">#ced7db</Color>
+    
+    <!-- Icons -->
+    <Color x:Key="Icon">#96000000</Color>
+    
+    <Color x:Key="ButtonIcon">#62696F</Color>
+    <Color x:Key="ButtonIconDark">#ced7db</Color>
+    
+    <Color x:Key="ButtonIconLight">#9da6a9</Color>
+    <Color x:Key="ButtonIconLightDark">#9da6a9</Color>
+    
+    <Color x:Key="ButtonIconLightSecondary">#ced7db</Color>
+    <Color x:Key="IconOnDarkBackground">White</Color>
+    
+    <!-- Statuses -->
+    <Color x:Key="StatusNew">#e56224</Color>
+    <Color x:Key="StatusCancelled">#545D5E</Color>
+    <Color x:Key="Status1">#63a4ff</Color>
+    
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>

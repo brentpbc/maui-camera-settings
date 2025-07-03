@@ -2,7 +2,8 @@
 <?xaml-comp compile="true" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cv="clr-namespace:MauiCameraSettings.Converters">
 
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
@@ -161,7 +162,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="Label">
+    <!--<Style TargetType="Label">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
@@ -178,11 +179,11 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
-    </Style>
+    </Style>-->
 
-    <Style TargetType="Span">
+    <!--<Style TargetType="Span">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-    </Style>
+    </Style>-->
 
     <Style TargetType="Label" x:Key="Headline">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
@@ -343,7 +344,7 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
     </Style>
 
-    <Style TargetType="Switch">
+    <!--<Style TargetType="Switch">
         <Setter Property="OnColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="ThumbColor" Value="{StaticResource White}" />
         <Setter Property="VisualStateManager.VisualStateGroups">
@@ -391,7 +392,7 @@
                 </VisualStateGroup>
             </VisualStateGroupList>
         </Setter>
-    </Style>
+    </Style>-->
   
     <!--
     <Style TargetType="TitleBar">
@@ -447,5 +448,353 @@
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
+    
+    <!-- Misc -->
+    <x:Boolean x:Key="HideNavBarSeparator">true</x:Boolean>
+    <x:String x:Key="QuestionYes">Y</x:String>
+    <x:String x:Key="QuestionNo">N</x:String>
+    
+    <!-- Date Formats-->
+    <x:String x:Key="DateTimeFormatShort">{0:dd/MM/yyyy}</x:String>
+    <x:String x:Key="DateTimeFormatDateOnly">{0:dd/MM/yyyy}</x:String>
+    <x:String x:Key="Time12HourFormat">{0:hh:mm tt}</x:String>
+    <x:String x:Key="DateTimeFormatShortWPrefix">Date: {0:dd/MM/yyyy}</x:String>
+    <x:String x:Key="DateTimeFormatLong">{0:dd/MM/yyyy hh:mmtt}</x:String>
+    <x:String x:Key="DateTimeFormatExtraLong">{0:dd/MM/yyyy hh:mm:ss tt}</x:String>
+    <x:String x:Key="DateTimeFormatNamesShort">{0:ddd, dd MMM yyyy}</x:String>
 
+    <!-- Fonts -->    
+    <x:String x:Key="OpenSansRegular">OpenSansRegular</x:String>
+    <x:String x:Key="OpenSansSemibold">OpenSansSemibold</x:String>
+
+    <!-- Sizes -->
+    <x:Double x:Key="MemoBoxHeight">150</x:Double>
+    <x:Double x:Key="MemoBoxHeightLarge">220</x:Double>
+    <x:Double x:Key="BadgeHeightSmall">28</x:Double> 
+    <x:Double x:Key="BadgeHeight">30</x:Double>
+    <x:Double x:Key="BadgeHeightLarge">35</x:Double>
+    <x:Double x:Key="TabHeaderHeight">45</x:Double>
+    <x:Double x:Key="BottomSheetHeight">400</x:Double>
+    <x:Double x:Key="IndicatorWidth">150</x:Double>
+    <x:Double x:Key="BadgeIconCountWidth">60</x:Double>
+    
+    <!-- Photo Heights -->
+    <x:Double x:Key="PhotoHeight">250</x:Double>
+    <x:Double x:Key="PhotoThumbnailHeightSmall">45</x:Double>
+    <x:Double x:Key="PhotoThumbnailHeightMediumSmall">55</x:Double>
+    <x:Double x:Key="PhotoThumbnailHeight">60</x:Double>
+    <x:Double x:Key="PhotoThumbnailHeightLarge">80</x:Double>
+    <x:Double x:Key="PhotoAddAndPreviewCtrlHeight">80</x:Double>
+    <!--<x:Double x:Key="PhotoGridHeight">100</x:Double>-->
+     <OnPlatform x:Key="PhotoGridHeight" x:TypeArguments="x:Double" Default="100">
+       <On Platform="iOS" Value="100" />
+       <On Platform="Android" Value="80" />
+     </OnPlatform>
+     <OnIdiom x:Key="PhotoRollHeightSmall" x:TypeArguments="x:Double" Phone="200" Tablet="350" />
+     <OnIdiom x:Key="PhotoRollHeight" x:TypeArguments="x:Double" Phone="250" Tablet="500" />
+   
+    <x:Double x:Key="SpacingStandard">8</x:Double>
+    <x:Double x:Key="SpacingSmall">4</x:Double>
+   
+    <x:Double x:Key="ButtonHeightSmall">36</x:Double>
+    
+    <!-- Grid Row Heights --> 
+    <x:Double x:Key="RowHeightMicroText">20</x:Double> <!-- Not Tested, may need tweaking -->
+    <x:Double x:Key="RowHeightSmallText">26</x:Double>
+    <x:Double x:Key="RowHeightSmallText2Lines">52</x:Double>
+    <x:Double x:Key="RowHeightSmallBoldText2Lines">55</x:Double>
+    <x:Double x:Key="RowHeightBadgeSmall">30</x:Double>
+    <x:Double x:Key="RowHeightMediumSmallText">30</x:Double>
+    <x:Double x:Key="RowHeightMediumText">35</x:Double>
+    <x:Double x:Key="RowHeightMediumBoldText">40</x:Double>
+    <x:Double x:Key="RowHeightMediumSmallText2Lines">60</x:Double>
+    <x:Double x:Key="RowHeightMediumText2Lines">70</x:Double>
+    <x:Double x:Key="RowHeightLargeText">40</x:Double>
+   
+    <x:Double x:Key="ButtonBarRowHeight">55</x:Double> 
+     
+    <!-- Icon Sizes-->
+    <x:Double x:Key="IconSizeLarge">48</x:Double>
+    <x:Double x:Key="IconSize">40</x:Double>
+    <x:Double x:Key="IconSizeMediumSmall">32</x:Double>
+    <x:Double x:Key="IconSizeSmall">25</x:Double>
+    <x:Double x:Key="IconSizeExtraSmall">20</x:Double>
+    <x:Double x:Key="IconSizeUltraSmall">16</x:Double>
+    
+    <!-- Radii -->
+    <CornerRadius x:Key="RadiusSmall">4</CornerRadius>
+    <CornerRadius x:Key="RadiusStandard">8</CornerRadius>
+    <CornerRadius x:Key="RadiusMedium">10</CornerRadius>
+    <CornerRadius x:Key="RadiusLarge">12</CornerRadius>
+    <CornerRadius x:Key="RadiusExtraLarge">16</CornerRadius>
+    <CornerRadius x:Key="RadiusBadge">9</CornerRadius>
+     
+    <!-- Padding -->
+    <x:Double x:Key="PaddingExtraSmall">2</x:Double>
+    <x:Double x:Key="PaddingSmall">4</x:Double>
+    <x:Double x:Key="PaddingStandard">8</x:Double>
+    <x:Double x:Key="PaddingMedium">16</x:Double>
+    <x:Double x:Key="PaddingLarge">32</x:Double>
+    
+    <!-- Collections -->
+    <x:Double x:Key="CollectionViewHeaderPadding">4</x:Double>
+    <x:Double x:Key="CollectionViewFooterPadding">8</x:Double>
+     
+    <!-- Progress Bar Sizes -->
+    <x:Double x:Key="ProgressBarHeightSmall">20</x:Double>
+    <x:Double x:Key="ProgressBarHeightText">25</x:Double>
+    <x:Double x:Key="ProgressBarHeightLarge">30</x:Double>
+    <x:Double x:Key="ProgressBarWidthSmall">80</x:Double>
+    <x:Double x:Key="ProgressBarWidthMedium">100</x:Double>
+    <x:Double x:Key="ProgressBarWidthLarge">140</x:Double>
+    <x:Double x:Key="ProgressBarWidthExtraLarge">160</x:Double>
+    
+    <!-- Font Sizes -->
+    <x:Double x:Key="FontSizeMicro">12</x:Double>
+    <x:Double x:Key="FontSizeSmall">14</x:Double>
+    <x:Double x:Key="FontSizeMediumSmall">16</x:Double>
+    <x:Double x:Key="FontSizeMedium">18</x:Double>
+    <x:Double x:Key="FontSizeMediumLarge">20</x:Double>
+    <x:Double x:Key="FontSizeLarge">22</x:Double>
+    <x:Double x:Key="FontSizeExtraLarge">24</x:Double>
+    <x:Double x:Key="FontSizeKeyPadLarge">46</x:Double>
+    
+    <!-- Apply style to all Labels using implicit style -->
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding 
+        Light={DynamicResource Text}, 
+        Dark={DynamicResource TextDark}}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}" />
+    </Style>
+    
+    <Style TargetType="Label" x:Key="BaseLabel">
+        <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding 
+        Light={DynamicResource Text}, 
+        Dark={DynamicResource TextDark}}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}" />
+    </Style>
+    
+    <Style x:Key="LabelLight" TargetType="Label" BasedOn="{StaticResource BaseLabel}">
+        <Setter Property="TextColor" Value="{AppThemeBinding 
+        Light={DynamicResource TextSecondary}, 
+        Dark={DynamicResource TextSecondaryDark}}" />
+    </Style>
+    
+    <Style TargetType="Span">
+     <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+     <Setter Property="TextColor" Value="{AppThemeBinding 
+       Light={DynamicResource Text}, 
+       Dark={DynamicResource TextDark}}" />
+     <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}" />
+    </Style>
+    
+    <Style x:Key="BaseSpan" TargetType="Span" >
+     <Setter Property="FontFamily" Value="{StaticResource OpenSansRegular}" />
+     <Setter Property="TextColor" Value="{AppThemeBinding 
+       Light={DynamicResource Text}, 
+       Dark={DynamicResource TextDark}}" />
+     <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}" />
+    </Style>
+    <Style x:Key="SpanLight" TargetType="Span" BasedOn="{StaticResource BaseSpan}">
+     <Setter Property="TextColor" Value="{AppThemeBinding 
+       Light={DynamicResource TextSecondary}, 
+       Dark={DynamicResource TextSecondaryDark}}" />
+    </Style>
+    
+    <Style TargetType="Span" x:Key="SpanDarkBgSmall" BasedOn="{StaticResource BaseSpan}">
+     <Setter Property="TextColor" Value="{DynamicResource TextDark}" />
+     <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}" />
+    </Style>
+    
+    <Style x:Key="LabelMicro" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMicro}"/>
+    </Style>
+
+    <Style x:Key="LabelSmall" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeSmall}"/>
+    </Style>
+
+    <Style x:Key="LabelMedium" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMedium}"/>
+    </Style>
+
+    <Style x:Key="LabelLarge" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeLarge}"/>
+    </Style>
+    
+    <Style x:Key="LabelExtraLarge" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource FontSizeExtraLarge}"/>
+    </Style>
+    
+    <Style x:Key="LabelFieldNameStyle" BasedOn="{StaticResource BaseLabel}" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource OpenSansSemibold}" />
+        <Setter Property="FontSize" Value="{StaticResource FontSizeMicro}"/>
+        <Setter Property="TextColor" Value="{AppThemeBinding 
+        Light={DynamicResource TextSecondary}, 
+        Dark={DynamicResource TextSecondaryDark}}" />
+    </Style>
+    
+    <Style x:Key="BaseButtonStyle" TargetType="Button" ApplyToDerivedTypes="True" >
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="TextColor" Value="{DynamicResource Primary}"/>
+        <!-- Needed For Android -->
+        <Setter Property="Padding"  Value="10"/>
+        <Setter Property="CornerRadius" Value="8"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <!-- Bug with rider displaying squiggles on dynamic resources in AppThemeBinding -->
+                            <Setter Property="TextColor" Value="{ DynamicResource TextDisabled}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={DynamicResource ActionDisabled}, Dark={DynamicResource ActionDisabledDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="BaseButtonOutlineStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="BorderWidth" Value="1.5"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{DynamicResource TextDisabled}" />
+                            <Setter Property="TextColor" Value="{DynamicResource TextDisabled}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={DynamicResource ActionDisabled}, Dark={DynamicResource ActionDisabledDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ButtonDangerOutlineStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonOutlineStyle}">
+        <Setter Property="BorderColor" Value="{DynamicResource DangerLight}"/>
+        <Setter Property="TextColor" Value="{DynamicResource DangerLight}"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BorderColor" Value="{DynamicResource DangerLight}"/>
+                            <Setter Property="BackgroundColor" Value="Transparent"/>
+                            <Setter Property="TextColor" Value="{DynamicResource DangerLight}"/>
+                            <Setter Property="BorderWidth" Value="1.5"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <!-- Bug with rider displaying squiggles on dynamic resources in AppThemeBinding -->
+                            <Setter Property="TextColor" Value="{DynamicResource TextDisabled}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={DynamicResource ActionDisabled}, Dark={DynamicResource ActionDisabledDark}}" />
+                            <Setter Property="BorderWidth" Value="0"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ButtonPrimaryStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}"/>
+        <Setter Property="TextColor" Value="{DynamicResource TextDark}"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{DynamicResource Primary}"/>
+                            <Setter Property="TextColor" Value="{DynamicResource TextDark}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <!-- Bug with rider displaying squiggles on dynamic resources in AppThemeBinding -->
+                            <Setter Property="TextColor" Value="{DynamicResource TextDisabled}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={DynamicResource ActionDisabled}, Dark={DynamicResource ActionDisabledDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonSecondaryLightStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{DynamicResource ActionSecondary}"/>
+        <Setter Property="TextColor" Value="{DynamicResource Text}"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{DynamicResource ActionSecondary}"/>
+                            <Setter Property="TextColor" Value="{DynamicResource Text}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <!-- Bug with rider displaying squiggles on dynamic resources in AppThemeBinding -->
+                            <Setter Property="TextColor" Value="{DynamicResource TextDisabled}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={DynamicResource ActionDisabled}, Dark={DynamicResource ActionDisabledDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="ButtonSecondaryDarkStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
+        <Setter Property="BackgroundColor" Value="{DynamicResource ActionSecondaryDark}"/>
+        <Setter Property="TextColor" Value="{DynamicResource TextDark}"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="{DynamicResource ActionSecondaryDark}"/>
+                            <Setter Property="TextColor" Value="{DynamicResource TextDark}"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <!-- Bug with rider displaying squiggles on dynamic resources in AppThemeBinding -->
+                            <Setter Property="TextColor" Value="{DynamicResource TextDisabled}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={DynamicResource ActionDisabled}, Dark={DynamicResource ActionDisabledDark}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="PointerOver" />
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+    
+    <!-- Xamarin must of automatically put spacing on stacklayouts so now all the Item spacing is wrong in Maui -->
+    <Style TargetType="StackLayout">
+        <Setter Property="Spacing" Value="8"/>
+    </Style>
+     
+    <!-- Xamarin must of automatically put spacing on stacklayouts -->
+    <Style TargetType="VerticalStackLayout">
+        <Setter Property="Spacing" Value="8"/>
+    </Style>
+     
+    <Style TargetType="HorizontalStackLayout">
+        <Setter Property="Spacing" Value="8"/>
+    </Style>
+    
+    <cv:InverseBooleanConverter x:Key="NotBool" />
+    <cv:IntToBoolConverter x:Key="hasItems" />
+    <cv:StringToBoolConverter x:Key="hasValue" />
 </ResourceDictionary>

@@ -39,12 +39,8 @@
             <ListView Grid.Row="0" SeparatorVisibility="None" SeparatorColor="Transparent" ItemsSource="{Binding Items}" ItemTemplate="{StaticResource ItemTemplateSelector}" HasUnevenRows="True" VerticalOptions="FillAndExpand"/>
             <StackLayout Grid.Row="1" IsVisible="{Binding CanShareItems}" Padding="{StaticResource PaddingStandard}">
                 <!-- Share Button -->
-                <ImageButton Command="{Binding ShareCommand}"
-                             Style="{StaticResource ButtonIconStyle}"                                              
+                <Button Text="Share" Command="{Binding ShareCommand}"
                              VerticalOptions="Center"
-                             WidthRequest="{StaticResource IconSizeSmall}"
-                             HeightRequest="{StaticResource IconSizeSmall}" 
-                             Source="{StaticResource ButtonIconShareSmall}"
                              Padding="0" Margin="0"/>
             </StackLayout>
             <!-- Busy Dialog -->
