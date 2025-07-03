@@ -16,7 +16,7 @@
             <Grid HeightRequest="{StaticResource PhotoRollHeightSmall}" Margin="{StaticResource PaddingStandard}">
                 <!-- Image Preview-->
                 <ffimageloading:CachedImage
-                    x:Name="SiteImage"
+                    x:Name="TheImage"
                     Source="{Binding Photo}"
                     BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundPlaceHolder}, Dark={StaticResource BackgroundPlaceHolderDark}}" 
                     DownsampleToViewSize="true" 
@@ -86,12 +86,8 @@
                         </Slider.Triggers>
                     </Slider>
                     
-                    <Label Text="Restore Orientation:" Style="{StaticResource LabelFieldNameStyle}"/>
+                    <Label Text="Restore Orientation(Shouldnt need on iOS):" Style="{StaticResource LabelFieldNameStyle}"/>
                     <Switch IsToggled="{Binding RestoreOrientationExif}" Toggled="RestoreOrientationSwitch_OnToggled" HorizontalOptions="Start"/>
-                    
-                    <!-- Settings Fields-->
-                    <Label Text="Save Photos To Device?:" Style="{StaticResource LabelFieldNameStyle}"/>
-                    <Switch IsToggled="{Binding SaveToDevice}" Toggled="SaveToDeviceSwitch_OnToggled" HorizontalOptions="Start"/>
             
                     <!-- Buttons -->
                     <Button Text="Image Metadata" Command="{Binding ViewImageMetaDataCommand}" Style="{StaticResource ButtonPrimaryStyle}"/>

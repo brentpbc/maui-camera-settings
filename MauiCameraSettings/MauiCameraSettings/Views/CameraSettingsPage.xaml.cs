@@ -39,16 +39,7 @@ public partial class CameraSettingsPage : ContentPage
     
     void PhotoSizeSlider_OnDragCompleted(object sender, EventArgs e)
     {
-        //Fire off Resize after a delay
         UpdateImage();
-    }
-
-    async void SaveToDeviceSwitch_OnToggled(object sender, ToggledEventArgs e)
-    {
-        if (e.Value)
-        {
-            await ViewModel.CheckSaveToDevicePermissions();
-        }
     }
 
     void ProcessImage_OnToggled(object sender, ToggledEventArgs e)
@@ -68,11 +59,5 @@ public partial class CameraSettingsPage : ContentPage
     void RestoreOrientationSwitch_OnToggled(object sender, ToggledEventArgs e)
     {
         UpdateImage();
-    }
-
-    async void ErrorDialogButton_OnClicked(object sender, EventArgs e)
-    {
-        //await DisplayAlert("Test", "Test clicked", "ok");
-        await DialogHelper.DisplayErrorMessage("Test", "Display error message clicked");
     }
 }

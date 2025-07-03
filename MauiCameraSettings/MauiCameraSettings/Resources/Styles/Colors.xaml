@@ -41,7 +41,6 @@
     
     <!-- Theme -->
     <Color x:Key="Primary">#1976d2</Color> <!-- Bootstrap Style Blue -->
-    <!-- <Color x:Key="Primary">#E90E65</Color>--> <!-- New BC Logo Pink -->
     <Color x:Key="PrimaryDark">#004ba0</Color>
     
     <Color x:Key="PrimaryInfo">#63a4ff</Color>

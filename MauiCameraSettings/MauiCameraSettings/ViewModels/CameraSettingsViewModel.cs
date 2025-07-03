@@ -10,6 +10,9 @@ using MauiCameraSettings.Models.Results;
 using MauiCameraSettings.Views;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Graphics.Platform;
+using IImage = Microsoft.Maui.Graphics.IImage;
 using NativeMedia;
 
 namespace MauiCameraSettings.ViewModels;
@@ -35,13 +38,6 @@ public class CameraSettingsViewModel : BaseViewModel
     {
         get { return photoSizeD; }
         set { SetProperty(ref photoSizeD, value); }
-    }
-
-    bool saveToDevice = true;
-    public bool SaveToDevice
-    {
-        get { return saveToDevice; }
-        set { SetProperty(ref saveToDevice, value); }
     }
     
     bool showImageButton = true;
@@ -113,7 +109,6 @@ public class CameraSettingsViewModel : BaseViewModel
         RestoreOrientationExif = Constants.Camera.RESTORE_PHOTO_EXIF;
 #endif
         
-        SaveToDevice = Constants.Camera.SAVE_PHOTOS_TO_ALBUM;
         PostProcessImage = Constants.Camera.POST_PROCESS_PHOTO;
 
     }
@@ -353,6 +348,7 @@ public class CameraSettingsViewModel : BaseViewModel
             IsBusy = true;
         });
         MemoryStream memoryStream = null;
+        string dimensions = string.Empty;
         try
         {
             if (postProcessImage)
@@ -367,19 +363,29 @@ public class CameraSettingsViewModel : BaseViewModel
                 }
                 else
                 {
-                    FinalFileBytes = resizeResult.Content;        
+                    var result = resizeResult.Content;
+                    FinalFileBytes = result.Bytes;        
+                    dimensions = $"{result.Image.Width}Wx{result.Image.Height}H";
                 }
             }
             else
             {
                 FinalFileBytes = OriginalFileBytes;
+                memoryStream = new MemoryStream(OriginalFileBytes); //Dont dispose or Image.FromSource wont load properly
+                memoryStream.Position = 0; //Initialise position to start of stream
+                var type = FileType.ToLower();
+                ImageFormat fmt = ImageFormat.Jpeg;
+                if (type == "png")
+                {
+                    fmt = ImageFormat.Png;
+                }
+                IImage image = PlatformImage.FromStream(memoryStream, fmt);
+                await memoryStream.DisposeAsync();
+                dimensions = $"{image.Width}Wx{image.Height}H";
             }
             
-            
-            //Get size in bytes
-            string sizeBytes = FinalFileBytes.Length.ToString();
             //Get human size
-            SizeHuman = UtilsHelper.ByteStrToHumanReadableStr(sizeBytes);
+            SizeHuman = UtilsHelper.ByteStrToHumanReadableStr(FinalFileBytes.Length) + " " + dimensions;
             var imageSource = ImageSource.FromStream(
                 () =>
                 {
@@ -421,25 +427,7 @@ public class CameraSettingsViewModel : BaseViewModel
                     new PhotoDetailPage(FinalFileBytes)));
         }
     }
-
-    public async Task CheckSaveToDevicePermissions()
-    {
-        if (SaveToDevice)
-        {
-            var status =  await PermissionHelper.CheckAndRequest<Services.SaveMediaPermission>("The application needs permission to save photos to the photo gallery");
-            if (!status)
-            {
-                string errorMessage =
-                    "The application did not get the necessary permission to save photos to the photo gallery. Check Settings App.";
-                await LoggingHelper.CreateErrorLog(nameof(CameraSettingsPage), "Save To Device Permissions",errorMessage);
-                await DialogHelper.DisplayErrorMessage("Insufficient Permissions",
-                    errorMessage);
-                SaveToDevice = false;    
-            }
-        }
-    }
-
-
+    
     public async Task ViewImageMetaData()
     {
         if (FinalFileBytes == null || FinalFileBytes.Length == 0)

@@ -19,11 +19,11 @@ public class ImageHelper
     /// <param name="compression">Compression 0 - 100, 0=No Compression, 100=100% Compression</param>
     /// <param name="restoreExifOrientation">True = restore EXIF Orientation metadata</param>
     /// <returns>Return a new memory stream with Resized Image</returns>
-    public static async Task<TypedTaskResult<byte[]>> ResizeImageAsync(MemoryStream memStream, string imageType, int resizeValue, int compression, bool restoreExifOrientation)
+    public static async Task<TypedTaskResult<ResizeResult>> ResizeImageAsync(MemoryStream memStream, string imageType, int resizeValue, int compression, bool restoreExifOrientation)
     {
         if (memStream == null)
         {
-            return TypedTaskResult<byte[]>.Failed("Error memstream is null");
+            return TypedTaskResult<ResizeResult>.Failed("Error memstream is null");
         }
         
         //Clamp Resize Values
@@ -82,9 +82,9 @@ public class ImageHelper
                 resizedImageStream.Position = 0;
             }
             
-            return TypedTaskResult<byte[]>.Succeeded(resizedImageStream.ToArray());
+            return TypedTaskResult<ResizeResult>.Succeeded(new ResizeResult(){Bytes = resizedImageStream.ToArray(), Image = newImage} );
         }
         
-        return TypedTaskResult<byte[]>.Failed("Error resizing image, image retrieved from stream was null");
+        return TypedTaskResult<ResizeResult>.Failed("Error resizing image, image retrieved from stream was null");
     }
 }
