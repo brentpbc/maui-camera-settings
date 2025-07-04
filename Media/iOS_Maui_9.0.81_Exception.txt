@@ -1,0 +1,10 @@
+UIKit.UIKitThreadAccessException: UIKit Consistency error: you are calling a UIKit method that can only be invoked from the UI thread.
+   at UIKit.UIApplication.EnsureUIThread() in /Users/builder/azdo/_work/1/s/macios/src/UIKit/UIApplication.cs:line 137
+   at UIKit.UIGraphicsRendererContext.get_CGContext() in /Users/builder/azdo/_work/1/s/macios/src/build/dotnet/ios/generated-sources/UIKit/UIGraphicsRendererContext.g.cs:line 202
+   at Microsoft.Maui.Graphics.Platform.UIImageExtensions.<>c__DisplayClass1_0.<ScaleImage>b__0(UIGraphicsImageRendererContext imageContext)
+   at ObjCRuntime.Trampolines.SDActionArity1V263.Invoke(IntPtr block, NativeHandle obj) in /Users/builder/azdo/_work/1/s/macios/src/build/dotnet/ios/generated-sources/ObjCRuntime/Trampolines.g.cs:line 35814
+   at UIKit.UIGraphicsImageRenderer.CreateImage(Action`1 actions) in /Users/builder/azdo/_work/1/s/macios/src/build/dotnet/ios/generated-sources/UIKit/UIGraphicsImageRenderer.g.cs:line 196
+   at Microsoft.Maui.Graphics.Platform.UIImageExtensions.ScaleImage(UIImage target, CGSize size, Boolean disposeOriginal)
+   at Microsoft.Maui.Graphics.Platform.UIImageExtensions.ScaleImage(UIImage target, Single maxWidth, Single maxHeight, Boolean disposeOriginal)
+   at Microsoft.Maui.Graphics.Platform.PlatformImage.Downsize(Single maxWidth, Single maxHeight, Boolean disposeOriginal)
+   at MauiCameraSettings.Helpers.ImageHelper.ResizeImageAsync(MemoryStream memStream, String imageType, Int32 resizeValue, Int32 compression, Boolean restoreExifOrientation, Boolean forceMainThread) in /Users/brentparish/src/maui-camera-settings/MauiCameraSettings/MauiCameraSettings/Helpers/ImageHelper.cs:line 74
