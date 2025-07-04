@@ -60,8 +60,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.81" />
-        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.81" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.90-ci.main.25353.3" />
+        <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="9.0.90-ci.main.25353.3" />
         <PackageReference Include="ExifLibNet.Updated" Version="2.1.5" />
         <PackageReference Include="FFImageLoading.Maui" Version="1.2.5" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0"/>
